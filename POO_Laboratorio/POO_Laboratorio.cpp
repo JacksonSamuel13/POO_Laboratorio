@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <string>
+
 using namespace std;
+
 class Producto {
 private:
 	string nombre;
@@ -8,34 +11,34 @@ private:
 	float precio;
 	int stock;
 public:
-    Animal(string n, int e) : nombre(n), edad(e) {}
-
-    virtual void hacerSonido() {
-        cout << nombre << " hace un sonido desconocido." << endl;
-    }
-};
-
-class Perro : public Animal {
-public:
-    Perro(string n, int e) : Animal(n, e) {}
-
-    void hacerSonido() override {
-        cout << nombre << " dice: Guau!" << endl;
-    }
-};
-
-class Automovil {
-private:
-    string marca;
-    int velocidad;
-
-public:
-    Automovil(string m, int v) : marca(m), velocidad(v) {}
-
-    void acelerar() {
-        velocidad += 10;
-        cout << "El automovil " << marca << " ahora va a " << velocidad << " km/h." << endl;
-    }
+	Producto(string nom, int cod, float prec, int stk) {
+		nombre = nom;
+		codigo = cod;
+		precio = prec;
+		stock = stk;
+	}
+	void mostrar() {
+		cout << "Código: " << codigo << ", Producto: " << nombre
+			<< ", Precio: Q" << precio << ", Stock: " << stock << endl;
+	}
+	int obtenerCodigo() {
+		return codigo;
+	}
+	int obtenerStock() {
+		return stock;
+	}
+	void actualizarStock(int cantidad) {
+		if (cantidad > stock) {
+			cout << "No hay suficiente stock disponible." << endl;
+		}
+		else {
+			stock -= cantidad;
+			cout << "Stock actualizado. Nuevo stock: " << stock << endl;
+		}
+	}
+	float obtenerValor() {
+		return stock * precio;
+	}
 };
 
 void agregarProducto(vector<Producto>& inventario) {
@@ -44,6 +47,7 @@ void agregarProducto(vector<Producto>& inventario) {
 	float precio;
 	cout << "Ingrese el nombre del producto: ";
 	cin >> ws; // Limpia el buffer de entrada
+	cin.ignore();
 	getline(cin, nombre);
 	cout << "Ingrese el código: ";
 	cin >> codigo;
@@ -96,6 +100,7 @@ void calcularValorTotal(vector<Producto>& inventario) {
 	}
 	cout << "Valor total del inventario: Q" << total << endl;
 }
+
 int main() {
 	vector<Producto> inventario;
 	int opcion;
