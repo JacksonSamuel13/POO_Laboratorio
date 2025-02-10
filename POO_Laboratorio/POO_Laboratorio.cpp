@@ -13,7 +13,9 @@ public:
         cout << nombre << " hace un sonido desconocido." << endl;
     }
 };
-
+/// <summary>
+/// 
+/// </summary>
 class Perro : public Animal {
 public:
     Perro(string n, int e) : Animal(n, e) {}
