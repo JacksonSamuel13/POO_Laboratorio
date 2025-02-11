@@ -18,7 +18,7 @@ public:
 		stock = stk;
 	}
 	void mostrar() {
-		cout << "Código: " << codigo << ", Producto: " << nombre
+		cout << "Codigo: " << codigo << ", Producto: " << nombre
 			<< ", Precio: Q" << precio << ", Stock: " << stock << endl;
 	}
 	int obtenerCodigo() {
@@ -49,7 +49,7 @@ void agregarProducto(vector<Producto>& inventario) {
 	cin >> ws; // Limpia el buffer de entrada
 	cin.ignore();
 	getline(cin, nombre);
-	cout << "Ingrese el código: ";
+	cout << "Ingrese el codigo: ";
 	cin >> codigo;
 	cout << "Ingrese el precio: ";
 	cin >> precio;
@@ -68,7 +68,7 @@ void mostrarInventario(vector<Producto>& inventario) {
 }
 void buscarProducto(vector<Producto>& inventario) {
 	int codigo;
-	cout << "Ingrese el código del producto a buscar: ";
+	cout << "Ingrese el codigo del producto a buscar: ";
 	cin >> codigo;
 	for (Producto& producto : inventario) {
 		if (producto.obtenerCodigo() == codigo) {
@@ -108,11 +108,11 @@ int main() {
 		cout << "\nSistema de Inventario\n";
 		cout << "1. Agregar producto\n";
 		cout << "2. Mostrar inventario\n";
-		cout << "3. Buscar producto por código\n";
+		cout << "3. Buscar producto por codigo\n";
 		cout << "4. Actualizar stock\n";
 		cout << "5. Calcular valor total del inventario\n";
 		cout << "6. Salir\n";
-		cout << "Seleccione una opción: ";
+		cout << "Seleccione una opcion: ";
 		cin >> opcion;
 		switch (opcion) {
 		case 1: agregarProducto(inventario); break;
@@ -121,7 +121,7 @@ int main() {
 		case 4: actualizarStock(inventario); break;
 		case 5: calcularValorTotal(inventario); break;
 		case 6: cout << "Saliendo del programa...\n"; break;
-		default: cout << "Opción no válida, intente de nuevo.\n";
+		default: cout << "Opcion no valida, intente de nuevo.\n";
 		}
 	} while (opcion != 6);
 	return 0;
