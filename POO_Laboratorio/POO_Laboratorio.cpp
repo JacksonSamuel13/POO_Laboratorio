@@ -1,36 +1,31 @@
-#include <iostream>
-using namespace std;
+#include "pch.h"
 
-//Funcion recursiva para calcular el factorial de un numero}
-int factorial(int n)
+using namespace System;
+using namespace System::Data;
+using namespace System::Data::SqlClient;
+int main(array<System::String^>^ args)
 {
-	if (n < 0) {
-		throw invalid_argument("Error: Factorial de un numero negativo no esta definido. ");
-	}
-	if (n == 0 || n == 1)
+	String^ cadenaConexion = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=Escuela;Integrated Security=True;";
+	SqlConnection^ conexion = gcnew SqlConnection(cadenaConexion);
+	try
 	{
-		return 1;
+		conexion->Open();
+		Console::WriteLine("Conexión exitosa a la base de datos.");
+		String^ consulta = "SELECT * FROM Estudiantes";
+		SqlCommand^ comando = gcnew SqlCommand(consulta, conexion);
+		SqlDataReader^ lector = comando->ExecuteReader();
+		while (lector->Read())
+		{
+			Console::WriteLine("ID: {0}, Nombre: {1}, Edad: {2}",
+				lector["Id"], lector["Nombre"], lector["Edad"]);
+		}
+		conexion->Close();
 	}
-	return n * factorial(n - 1);
-}
-
-int main() {
-	try {
-		int numero;
-		cout << "Ingrese un numero para calcularle el factorial: ";
-		cin >> numero;
-
-		int resultado = factorial(numero);
-		cout << "El factorial de " << numero << " es: " << resultado << endl;
+	catch (Exception^ ex)
+	{
+		Console::WriteLine("Error: {0}", ex->Message);
 	}
-	/*catch (const exception& e) {
-		cerr << "Exception capturada: " << e.what() << endl;
-	}*/
-	catch (...) {
-		cerr << "No seas wey y coloca un numero positivo." << endl;
-	}
-
+	Console::ReadLine();
 	return 0;
-	
 }
 
